@@ -50,11 +50,14 @@
                 return $project;
             }
 
-            // Recursively search in subtasks
-            $foundInSubtasks = findProjectById($project['subtasks'], $projectId);
-            if ($foundInSubtasks) {
-                return $foundInSubtasks;
+            if (isset($project['subtasks'])) {
+                // Recursively search in subtasks
+                $foundInSubtasks = findProjectById($project['subtasks'], $projectId);
+                if ($foundInSubtasks) {
+                    return $foundInSubtasks;
+                }
             }
+            
         }
 
         return null;

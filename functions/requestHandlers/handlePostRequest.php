@@ -88,7 +88,7 @@ function handlePostRequest($conn) {
 
     }else if($_GET['route'] === 'register'){
         include_once __DIR__.'/../register.php';
-        
+
         $json_data = file_get_contents('php://input');
 
         // Decode JSON data into an associative array
@@ -109,6 +109,27 @@ function handlePostRequest($conn) {
         $register = register($conn, $full_name, $email, $password);
 
         echo json_encode($register);
+    }else if($_GET['route'] === 'import-projects'){
+        include_once __DIR__.'/../importProjects.php';
+        
+        $json_data = file_get_contents('php://input');
+
+        $user_id = $_GET['user_id'];
+
+        // Decode JSON data into an associative array
+        $data = json_decode($json_data, true);
+
+        // Check if the required fields are present in the JSON data
+        if (!isset($data['projectsData'])) {
+            http_response_code(400); // Bad Request
+            echo json_encode(['error' => 'Invalid request parameters']);
+            exit();
+        }
+
+        $projects_data = $data['projectsData'];
+
+        importProjects($conn, $user_id, $projects_data);
+        // echo $data['projectData'];
     }
 }
 
