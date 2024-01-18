@@ -25,7 +25,7 @@
         // Check if the query was successful
         if ($success) {
             $userId = $conn->insert_id;
-            $token = generateToken($userId);
+            $token = generateToken($userId, $full_name);
 
             http_response_code(201); // Created
             echo json_encode(['message' => 'User registered successfully', 'token' => $token]);

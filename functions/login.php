@@ -30,7 +30,7 @@
 
             // Verify the password
             if (password_verify($password, $hashedPassword)) {
-                $token = generateToken($user_id);
+                $token = generateToken($user_id, $full_name);
 
                 http_response_code(200); // OK
                 return ['message' => 'Login successful', 'token' => $token, 'user_id' => $user_id, 'full_name' => $full_name, 'email'=> $email];

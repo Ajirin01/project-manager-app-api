@@ -5,10 +5,11 @@ require __DIR__ . '/../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-function generateToken($userId) {
+function generateToken($userId, $userName) {
     $key = "My-pin<is>Sin2@+cos2@"; // Replace with a secure secret key
     $payload = [
         "user_id" => $userId,
+        "user_name" => $userName,
         "exp" => time() + (60 * 60 * 24), // Token expiration time (e.g., 24 hours)
     ];
 
